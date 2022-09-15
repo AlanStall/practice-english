@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#root {
+  max-width: 2000px;
+  margin: 0;
+  text-align: center;
+}
+
+button {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  cursor: pointer;  
+}
