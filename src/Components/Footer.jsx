@@ -8,22 +8,22 @@ export function Footer() {
         className="footer footer-center gap-2 py-4 xs2:p-4 bg-base-200 text-base-content rounded"
         >
         <div className="grid grid-flow-col gap-2 xs:gap-4">
-            <a className="link link-hover hover:text-[#00ff88]" href="https://github.com/AlanStall">
+            <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="https://github.com/AlanStall">
             Desenvolvedor
             </a>
             <a
-            className="link link-hover hover:text-[#00ff88]"
+            className="link link-hover hover:text-[#00ff88]" target="_blank"
             href="https://www.linkedin.com/in/alan-stall-b722a962/"
             >
             Contato
             </a>
-            <a className="link link-hover hover:text-[#00ff88]" href="https://github.com/AlanStall/practice-english">
+            <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="https://github.com/AlanStall/practice-english">
             Código Fonte
             </a>
         </div>
 
         <div className="grid grid-flow-col gap-2">
-            <a href="https://github.com/AlanStall">
+            <a href="https://github.com/AlanStall" target="_blank">
             <button className="btn-outline btn-success rounded-md">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ export function Footer() {
                 </svg>
             </button>
             </a>
-            <a href="https://www.linkedin.com/in/alan-stall-b722a962/">
+            <a href="https://www.linkedin.com/in/alan-stall-b722a962/" target="_blank">
             <button className="btn-outline btn-success rounded-md">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"

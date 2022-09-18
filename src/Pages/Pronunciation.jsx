@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Footer } from '../Components/Footer';
 
 export function Pronunciation() {
   const navigate = useNavigate();
@@ -962,6 +961,7 @@ export function Pronunciation() {
     recognition.start();
 
     recognition.onresult = (event) => {
+      setMicrophoneOn(false);
       const transcript = event.results[0][0].transcript.toLowerCase();
       setSpoken(transcript);
       check(transcript);
@@ -989,10 +989,13 @@ export function Pronunciation() {
   return (
     <>
       <div
-        className="min-h-screen bg-gradient-to-r from-gray-500 via-gray-900 to-gray-500 pt-2 lg:pt-10 "        
+        className="pt-2 lg:pt-10 "        
       >
-        <h1 className="relative m-2 font-bold text-[28px]">Pronunciation English</h1>
-        <label htmlFor="my-modal-6" className="btn modal-button animate-pulse">Como funciona!</label>
+        <div className='mb-10 grid place-items-center'>
+          <h1 className="text-center relative m-2 font-bold text-[28px]">Pronunciation English</h1>
+          <label htmlFor="my-modal-6" className="btn btn-secondary modal-button animate-pulse">Como funciona!</label>
+        </div>
+
         <input type="checkbox" id="my-modal-6" className="modal-toggle" />
         <div className="modal modal-bottom modal-middle">
           <div className="modal-box text-[15px]">
@@ -1007,19 +1010,19 @@ export function Pronunciation() {
             </div>
           </div>
         </div>
-        <div className="card bg-base-100 shadow-xl m-2 p-2 h-96 sm:mx-20 sm:p-8 sm:h-80">
+        <div className="grid place-items-center bg-base-300 card shadow-xl m-2 p-2 h-96 sm:mx-20 sm:p-8 sm:h-80 bg-base-400">
           <div>
-            <button className="btn btn-sm btn-outline btn-success xs:btn-md" onClick={updateWord}>
+            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" onClick={updateWord}>
               TROCAR PALAVRA
             </button>
             <button
-              className="btn btn-sm btn-outline btn-success xs:btn-md"
+              className="btn btn-sm btn-outline btn-success xs:btn-md  mr-2"
               onClick={listenWord}
               disabled={disabled}              
             >
               OUVIR
             </button>
-            <button className="btn btn-sm btn-outline btn-success xs:btn-md" onClick={speakWord}>
+            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" disabled={microphoneOn} onClick={speakWord}>
               PRONUNCIAR
             </button>
             <button className="relative top-3.5 rounded-md" style={{ animation: microphoneOn ? 'pulse 1.5s ease-out infinite' : '' , color: microphoneOn ? '#fa4b4bfb' : 'gray'}}>
@@ -1034,20 +1037,20 @@ export function Pronunciation() {
 			          <path d="M147.483,168.391c12.436,0,22.554-10.115,22.554-22.551v-12.991h-45.108v12.991C124.929,158.274,135.047,168.391,147.483,168.391z"/>
                 </svg>
             </button>
-            <p className="text-[14px] font-bold p-2 xs2:text-[24px] xs2:p-4 sm:text-[28px]">
+            <p className="text-center text-[14px] font-bold p-2 xs2:text-[24px] xs2:p-4 sm:text-[28px]">
               {word}
             </p>
-            <p className="text-[14px] font-bold p-2 xs2:text-[20px] xs2:p-4 sm:text-[24px]">
+            <p className="text-center text-[14px] font-bold p-2 xs2:text-[20px] xs2:p-4 sm:text-[24px]">
               {spoken}
             </p>            
-            <p className="text-[14px] font-bold p-2 xs2:text-[16px] xs2:p-4 md:text-[18px]">
+            <p className="text-center text-[14px] font-bold p-2 xs2:text-[16px] xs2:p-4 md:text-[18px]">
               {message}
             </p>
           </div>
           <br></br>
           <br></br>
         </div>
-        <div className="py-4 xs2:pt-10 xs:pt-16 xs:text-[20px] sm:pt-32 sm:text-[24px] lg:pt-56">
+        <div className="grid place-items-center py-4 xs2:pt-10 xs:pt-16 xs:text-[20px] sm:text-[24px]">
           <p className="font-bold">Monte sua lista de palavras</p>
           <button
             className="btn btn-success btn-start xs2:m-4 xs:mt-4 sm:m-6"
@@ -1057,8 +1060,6 @@ export function Pronunciation() {
           </button>
         </div>        
       </div>
-      <Footer />
     </>
   );
 }
-
