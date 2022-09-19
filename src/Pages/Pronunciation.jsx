@@ -912,10 +912,11 @@ export function Pronunciation() {
   ];
 
   const [word, setWord] = useState(randomWord());
-  const [spoken, setSpoken] = useState('');
+  const [spoken, setSpoken] = useState('');  
   const [message, setMessage] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [microphoneOn, setMicrophoneOn] = useState(false);
+  const [notChangeWord, setNotChangeWord] = useState(false);
 
   function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -938,7 +939,7 @@ export function Pronunciation() {
     wordShow();
     setSpoken('');
     setMessage('');
-    setDisabled(false);
+    setDisabled(false);       
   }
 
   async function listenWord() {
@@ -953,23 +954,27 @@ export function Pronunciation() {
     setDisabled(false);
   }
 
-  function speakWord() {
-    setMicrophoneOn(true);
+  async function speakWord() {      
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = 'en-US';
     recognition.start();
-
-    recognition.onresult = (event) => {
-      setMicrophoneOn(false);
+    
+    recognition.onresult = (event) => {            
       const transcript = event.results[0][0].transcript.toLowerCase();
       setSpoken(transcript);
       check(transcript);
     };    
+    await sleep(0);
+    setNotChangeWord(true);
+    setMicrophoneOn(true);
+    await sleep(9000);
+    /* setNotChangeWord(false); */
+    setMicrophoneOn(false);
   }
 
   let nextWord = '';
-  async function check(transcript) {
+  async function check(transcript) {    
     if (word === transcript || nextWord === transcript) {
       setMessage("Você acertou!!!"); 
       await sleep(2000);
@@ -979,10 +984,10 @@ export function Pronunciation() {
       setMessage('');
       speakWord();
     } else {
+      setNotChangeWord(false);
       setMessage(
         "Tente novamente pelo botão PRONUNCIAR ou troque a palavra"
-      );
-      setMicrophoneOn(false);            
+      );                
     }    
   }
   
@@ -1004,7 +1009,7 @@ export function Pronunciation() {
             <div className="py-1 leading-relaxed">Ao acessar, permita/autorize a ativação do seu microfone;</div>
             <div className="py-1 leading-relaxed">É exibida uma palavra em inglês, que você pode trocar por outra pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>TROCAR PALAVRA</p> . Você também pode ouvir a pronúncia correta pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>OUVIR</p> , e pode praticar sua pronúncia pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> ;</div>
             <div className="py-1 leading-relaxed">Se você acertar a pronúncia, uma nova palavra será exibida e o microfone continuará ativado por alguns instantes para você continuar praticando. Se você não acertar, você pode tentar novamente clicando em <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> , ou trocar a palavra. Se você trocar a palavra, precisará ativar novamente o microfone pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> .</div>
-            <div className="py-1 leading-relaxed"> Então, bora praticar e destravar essa língua 😃 </div>
+            <div className="py-1 leading-relaxed">Então, bora praticar e destravar essa língua 😃 </div>
             <div className="modal-action">
               <label htmlFor="my-modal-6" className="btn">Ok!</label>
             </div>
@@ -1012,20 +1017,24 @@ export function Pronunciation() {
         </div>
         <div className="grid place-items-center bg-base-300 card shadow-xl m-2 p-2 h-96 sm:mx-20 sm:p-8 sm:h-80 bg-base-400">
           <div>
-            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" onClick={updateWord}>
+            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" 
+              disabled={notChangeWord} 
+              onClick={updateWord}>
               TROCAR PALAVRA
             </button>
             <button
               className="btn btn-sm btn-outline btn-success xs:btn-md  mr-2"
               onClick={listenWord}
-              disabled={disabled}              
+              disabled={disabled}
             >
               OUVIR
             </button>
-            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" disabled={microphoneOn} onClick={speakWord}>
+            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" 
+            onClick={speakWord}>
               PRONUNCIAR
             </button>
-            <button className="relative top-3.5 rounded-md" style={{ animation: microphoneOn ? 'pulse 1.5s ease-out infinite' : '' , color: microphoneOn ? '#fa4b4bfb' : 'gray'}}>
+            <button className="relative top-3.5 rounded-md"
+              style={{ animation: microphoneOn ? 'pulse 1.5s ease-out infinite' : '' , color: microphoneOn ? '#fa4b4bfb' : 'gray'}}>
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="35"
