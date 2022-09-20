@@ -165,7 +165,7 @@ export function Pronunciation() {
     'concern',
     'condition',
     'conference',
-    'Congress',
+    'congress',
     'consider',
     'consumer',
     'contain',
@@ -189,8 +189,7 @@ export function Pronunciation() {
     'dark',
     'data',
     'daughter',
-    'day',
-    'dead',
+    'day',    
     'deal',
     'death',
     'debate',
@@ -238,8 +237,7 @@ export function Pronunciation() {
     'economic',
     'economy',
     'edge',
-    'education',
-    'effect',
+    'education',    
     'effort',
     'either',
     'election',
@@ -453,8 +451,7 @@ export function Pronunciation() {
     'maintain',
     'major',
     'majority',
-    'make',
-    'man',
+    'make',    
     'manage',
     'management',
     'manager',
@@ -558,14 +555,12 @@ export function Pronunciation() {
     'page',    
     'painting',
     'paper',
-    'parent',
-    'part',
+    'parent',    
     'participant',
     'particular',
     'particularly',
     'partner',
-    'party',
-    'pass',
+    'party',    
     'patient',
     'pattern',
     'peace',
@@ -578,8 +573,7 @@ export function Pronunciation() {
     'phone',
     'physical',
     'pick',
-    'picture',
-    'piece',
+    'picture',    
     'place',
     'plan',
     'plant',
@@ -673,8 +667,7 @@ export function Pronunciation() {
     'rise',
     'risk',
     'road',
-    'rock',
-    'role',
+    'rock',    
     'room',
     'rule',
     'run',
@@ -706,8 +699,7 @@ export function Pronunciation() {
     'several',
     'sex',
     'sexual',
-    'shake',
-    'share',
+    'shake',    
     'shoot',
     'short',
     'shot',
@@ -719,8 +711,7 @@ export function Pronunciation() {
     'significant',
     'similar',
     'simple',
-    'simply',
-    'since',
+    'simply',    
     'sing',
     'single',
     'sister',
@@ -800,11 +791,9 @@ export function Pronunciation() {
     'television',
     'tell',
     'term',
-    'test',
-    'than',
+    'test',    
     'thank',
-    'that',    
-    'their',
+    'that',        
     'them',
     'themselves',
     'then',
@@ -821,8 +810,7 @@ export function Pronunciation() {
     'thousand',
     'threat',
     'through',
-    'throughout',
-    'thus',
+    'throughout',    
     'time',
     'today',
     'together',
@@ -884,8 +872,7 @@ export function Pronunciation() {
     'while',
     'white',
     'who',
-    'whole',
-    'whose',
+    'whole',    
     'why',
     'wife',
     'will',
@@ -914,9 +901,9 @@ export function Pronunciation() {
   const [word, setWord] = useState(randomWord());
   const [spoken, setSpoken] = useState('');  
   const [message, setMessage] = useState('');
-  const [disabled, setDisabled] = useState(false);
+  const [disabledListening, setDisabledListening] = useState(false);
   const [microphoneOn, setMicrophoneOn] = useState(false);
-  const [notChangeWord, setNotChangeWord] = useState(false);
+  const [notChangeWord, setNotChangeWord] = useState(false);  
 
   function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -939,7 +926,7 @@ export function Pronunciation() {
     wordShow();
     setSpoken('');
     setMessage('');
-    setDisabled(false);       
+    setDisabledListening(false);       
   }
 
   async function listenWord() {
@@ -949,46 +936,45 @@ export function Pronunciation() {
     speech.lang = 'en-US';
     window.speechSynthesis.speak(speech);
     await sleep(0);
-    setDisabled(true);
+    setDisabledListening(true);
     await sleep(1000);
-    setDisabled(false);
+    setDisabledListening(false);
   }
 
-  async function speakWord() {      
+  async function speakWord() {
+    setNotChangeWord(true);
+    setDisabledListening(true);    
+    setMicrophoneOn(true);
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = 'en-US';
     recognition.start();
     
-    recognition.onresult = (event) => {            
+    recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript.toLowerCase();
       setSpoken(transcript);
-      check(transcript);
+      check(transcript);      
     };    
-    await sleep(0);
-    setNotChangeWord(true);
-    setMicrophoneOn(true);
-    await sleep(9000);
-    /* setNotChangeWord(false); */
-    setMicrophoneOn(false);
   }
 
   let nextWord = '';
-  async function check(transcript) {    
-    if (word === transcript || nextWord === transcript) {
-      setMessage("Você acertou!!!"); 
+  async function check(transcript) {     
+    if (word === transcript || nextWord === transcript || null === transcript) {            
+      setMessage("Você acertou!!!");
       await sleep(2000);
       nextWord = randomWord();
       setWord(nextWord);
       setSpoken('');
       setMessage('');
-      speakWord();
-    } else {
-      setNotChangeWord(false);
+      speakWord();      
+    } else {      
+      setDisabledListening(false);
+      setMicrophoneOn(false);
+      setNotChangeWord(false);      
       setMessage(
         "Tente novamente pelo botão PRONUNCIAR ou troque a palavra"
-      );                
-    }    
+      );
+    };    
   }
   
   return (
@@ -1005,9 +991,10 @@ export function Pronunciation() {
         <div className="modal modal-bottom modal-middle">
           <div className="modal-box text-[15px]">
             <h3 className="font-bold text-[18px] text-[#00ff88] tracking-[.20em]">Como funciona!</h3>
-            <div className="py-1 leading-relaxed">Por utilizar a ferramenta do Google TTS e STT (Text to Speech e Speech to Text), por favor, acesse esse App pelo navegador Google Chrome;</div>
+            <div className="py-1 leading-relaxed">Por utilizar a ferramenta do Google TTS e STT (Text to Speech e Speech to Text), por favor, acesse esse App pelo navegador Google Chrome e por dispositivos Android;</div>
             <div className="py-1 leading-relaxed">Ao acessar, permita/autorize a ativação do seu microfone;</div>
             <div className="py-1 leading-relaxed">É exibida uma palavra em inglês, que você pode trocar por outra pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>TROCAR PALAVRA</p> . Você também pode ouvir a pronúncia correta pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>OUVIR</p> , e pode praticar sua pronúncia pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> ;</div>
+            <div className="py-1 leading-relaxed">Se você clicou em <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> , e depois de alguns segundos você não pronunciou em voz alta, clique neste botão para ativar novamente o microfone e então testar sua pronúncia ;</div>
             <div className="py-1 leading-relaxed">Se você acertar a pronúncia, uma nova palavra será exibida e o microfone continuará ativado por alguns instantes para você continuar praticando. Se você não acertar, você pode tentar novamente clicando em <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> , ou trocar a palavra. Se você trocar a palavra, precisará ativar novamente o microfone pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> .</div>
             <div className="py-1 leading-relaxed">Então, bora praticar e destravar essa língua 😃 </div>
             <div className="modal-action">
@@ -1025,16 +1012,18 @@ export function Pronunciation() {
             <button
               className="btn btn-sm btn-outline btn-success xs:btn-md  mr-2"
               onClick={listenWord}
-              disabled={disabled}
+              disabled={disabledListening}
             >
               OUVIR
             </button>
             <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" 
-            onClick={speakWord}>
+            onClick={speakWord}             
+            > 
               PRONUNCIAR
             </button>
             <button className="relative top-3.5 rounded-md"
-              style={{ animation: microphoneOn ? 'pulse 1.5s ease-out infinite' : '' , color: microphoneOn ? '#fa4b4bfb' : 'gray'}}>
+              style={{ animation: microphoneOn ? 'pulse 1.5s ease-out infinite' : '' , color: microphoneOn ? '#fa4b4bfb' : 'gray'}}
+              >
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="35"
