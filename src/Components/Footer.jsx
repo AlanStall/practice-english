@@ -23,8 +23,8 @@ export function Footer() {
         </div>
 
         <div className="grid grid-flow-col gap-2">
-            <a href="https://github.com/AlanStall" target="_blank">
-            <button className="btn-outline btn-success rounded-md">
+            <a href="https://github.com/AlanStall" target="_blank" title="GitHub">
+            <button className="btn-outline btn-success rounded-md" aria-label="GitHub">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
@@ -36,8 +36,8 @@ export function Footer() {
                 </svg>
             </button>
             </a>
-            <a href="https://www.linkedin.com/in/alan-stall-b722a962/" target="_blank">
-            <button className="btn-outline btn-success rounded-md">
+            <a href="https://www.linkedin.com/in/alan-stall-b722a962/" target="_blank" title="LinkedIn">
+            <button className="btn-outline btn-success rounded-md" aria-label="LinkedIn">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="35"
@@ -58,7 +58,7 @@ export function Footer() {
                     <button className="btn btn-outline btn-sm mt-3 xs:btn-xs xs:mt-0">Copiar e-mail</button>
                 </CopyToClipboard>
             </div>
-            <p className="developed">Copyright © 2022 - Desenvolvido por Alan Stall</p>            
+            <p className="developed">Copyright © 2022 - Desenvolvido por Alan Stall</p>
         </div>
     </footer>
   );

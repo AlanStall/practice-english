@@ -872,7 +872,7 @@ export function Pronunciation() {
     'while',
     'white',
     'who',
-    'whole',    
+    'whole',
     'why',
     'wife',
     'will',
@@ -887,7 +887,7 @@ export function Pronunciation() {
     'wonder',
     'word',
     'work',
-    'worker',        
+    'worker',
     'wrong',
     'yard',
     'yes',
@@ -899,11 +899,11 @@ export function Pronunciation() {
   ];
 
   const [word, setWord] = useState(randomWord());
-  const [spoken, setSpoken] = useState('');  
+  const [spoken, setSpoken] = useState('');
   const [message, setMessage] = useState('');
   const [disabledListening, setDisabledListening] = useState(false);
   const [microphoneOn, setMicrophoneOn] = useState(false);
-  const [notChangeWord, setNotChangeWord] = useState(false);  
+  const [notChangeWord, setNotChangeWord] = useState(false);
 
   function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -921,12 +921,12 @@ export function Pronunciation() {
     setWord(randomWord());
   }
 
-  function updateWord() {
+  function changeWord() {
     setMicrophoneOn(false);
     wordShow();
     setSpoken('');
     setMessage('');
-    setDisabledListening(false);       
+    setDisabledListening(false);
   }
 
   async function listenWord() {
@@ -943,7 +943,7 @@ export function Pronunciation() {
 
   async function speakWord() {
     setNotChangeWord(true);
-    setDisabledListening(true);    
+    setDisabledListening(true);
     setMicrophoneOn(true);
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
@@ -953,37 +953,37 @@ export function Pronunciation() {
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript.toLowerCase();
       setSpoken(transcript);
-      check(transcript);      
-    };    
+      check(transcript);
+    };
   }
 
   let nextWord = '';
-  async function check(transcript) {     
-    if (word === transcript || nextWord === transcript || null === transcript) {            
+  async function check(transcript) {
+    if (word === transcript || nextWord === transcript || null === transcript) {
       setMessage("Você acertou!!!");
       await sleep(2000);
       nextWord = randomWord();
       setWord(nextWord);
       setSpoken('');
       setMessage('');
-      speakWord();      
-    } else {      
+      speakWord();
+    } else {
       setDisabledListening(false);
       setMicrophoneOn(false);
-      setNotChangeWord(false);      
+      setNotChangeWord(false);
       setMessage(
         "Tente novamente pelo botão PRONUNCIAR ou troque a palavra"
       );
-    };    
+    };
   }
   
   return (
     <>
       <div
-        className="pt-2 lg:pt-10 "        
+        className="pt-2 lg:pt-10"
       >
         <div className='mb-10 grid place-items-center'>
-          <h1 className="text-center relative m-2 font-bold text-[28px]">Pronunciation English</h1>
+          <h1 className="text-center relative m-2 font-bold text-[28px]" title="Pronunciation English">Pronunciation English</h1>
           <label htmlFor="my-modal-6" className="btn btn-secondary modal-button animate-pulse">Como funciona!</label>
         </div>
 
@@ -991,9 +991,9 @@ export function Pronunciation() {
         <div className="modal modal-bottom modal-middle">
           <div className="modal-box text-[15px]">
             <h3 className="font-bold text-[18px] text-[#00ff88] tracking-[.20em]">Como funciona!</h3>
-            <div className="py-1 leading-relaxed">Por utilizar a ferramenta do Google TTS e STT (Text to Speech e Speech to Text), por favor, acesse esse App pelo navegador Google Chrome e por dispositivos Android;</div>
+            <div className="py-1 leading-relaxed">Por utilizar a ferramenta do Google TTS e STT (Text to Speech e Speech to Text), por favor, acesse esse App pelo navegador Google Chrome ou por dispositivos Android;</div>
             <div className="py-1 leading-relaxed">Ao acessar, permita/autorize a ativação do seu microfone;</div>
-            <div className="py-1 leading-relaxed">É exibida uma palavra em inglês, que você pode trocar por outra pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>TROCAR PALAVRA</p> . Você também pode ouvir a pronúncia correta pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>OUVIR</p> , e pode praticar sua pronúncia pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> ;</div>
+            <div className="py-1 leading-relaxed">É exibida uma palavra em inglês, que você pode trocar por outra pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>TROCAR PALAVRA</p> . Você pode também ouvir a pronúncia correta pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>OUVIR</p> , e pode praticar sua pronúncia pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> ;</div>
             <div className="py-1 leading-relaxed">Se você clicou em <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> , e depois de alguns segundos você não pronunciou em voz alta, clique neste botão para ativar novamente o microfone e então testar sua pronúncia ;</div>
             <div className="py-1 leading-relaxed">Se você acertar a pronúncia, uma nova palavra será exibida e o microfone continuará ativado por alguns instantes para você continuar praticando. Se você não acertar, você pode tentar novamente clicando em <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> , ou trocar a palavra. Se você trocar a palavra, precisará ativar novamente o microfone pelo botão <p className='btn btn-outline text-[#00ff88] btn-success btn-xs'>PRONUNCIAR</p> .</div>
             <div className="py-1 leading-relaxed">Então, bora praticar e destravar essa língua 😃 </div>
@@ -1004,9 +1004,9 @@ export function Pronunciation() {
         </div>
         <div className="grid place-items-center bg-base-300 card shadow-xl m-2 p-2 h-96 sm:mx-20 sm:p-8 sm:h-80 bg-base-400">
           <div>
-            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" 
-              disabled={notChangeWord} 
-              onClick={updateWord}>
+            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2"
+              disabled={notChangeWord}
+              onClick={changeWord}>
               TROCAR PALAVRA
             </button>
             <button
@@ -1016,19 +1016,20 @@ export function Pronunciation() {
             >
               OUVIR
             </button>
-            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2" 
-            onClick={speakWord}             
+            <button className="btn btn-sm btn-outline btn-success xs:btn-md mr-2"
+            onClick={speakWord}
             > 
               PRONUNCIAR
             </button>
-            <button className="relative top-3.5 rounded-md"
+            <button className="relative top-3.5 rounded-md pointer-events-none"
               style={{ animation: microphoneOn ? 'pulse 1.5s ease-out infinite' : '' , color: microphoneOn ? '#fa4b4bfb' : 'gray'}}
+              aria-label="Microphone"
               >
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="35"
                 height="35"
-                viewBox="0 0 300 300"                
+                viewBox="0 0 300 300"
                 className="fill-current h-10"
                 >
                 <path d="M149.996,0C67.157,0,0.001,67.161,0.001,149.997S67.157,300,149.996,300s150.003-67.163,150.003-150.003S232.835,0,149.996,0z M109.368,100.055c0-21.018,17.1-38.115,38.115-38.115s38.115,17.099,38.115,38.115v45.782c0,21.016-17.1,38.113-38.115,38.113c-21.015,0-38.115-17.1-38.115-38.113V100.055z M209.384,147.282c0,31.662-23.905,57.832-54.613,61.452v20.915h12.802v15.562H126.41v-15.562h12.802v-21.042c-30.231-4.056-53.628-30.003-53.628-61.328v-21.742h15.562v21.742c0,25.549,20.788,46.334,46.337,46.334s46.34-20.788,46.34-46.334v-21.742h15.562C209.384,125.537,209.384,147.282,209.384,147.282z"/>
@@ -1040,7 +1041,7 @@ export function Pronunciation() {
             </p>
             <p className="text-center text-[14px] font-bold p-2 xs2:text-[20px] xs2:p-4 sm:text-[24px]">
               {spoken}
-            </p>            
+            </p>
             <p className="text-center text-[14px] font-bold p-2 xs2:text-[16px] xs2:p-4 md:text-[18px]">
               {message}
             </p>
@@ -1056,7 +1057,7 @@ export function Pronunciation() {
           >
             MINHA LISTA
           </button>
-        </div>        
+        </div>
       </div>
     </>
   );
