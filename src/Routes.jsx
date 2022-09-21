@@ -10,7 +10,7 @@ function AllRoutes() {
     <Routes>
       <Route path="/" element={< App />}>
         <Route path="/" element={< Pronunciation />} />
-        <Route path="/Add" element={< Add />} />      
+        <Route path="/Add" element={< Add />} />        
         <Route path="*" element={<h3 className='grid place-items-center text-2xl'>Not Found</h3>} />
       </Route>
     </Routes>
