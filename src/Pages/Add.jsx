@@ -12,7 +12,7 @@ export function Add() {
             onClick={() => navigate('/')}
         >
         Voltar
-        </button>
+        </button>        
     </div>
     );
 }

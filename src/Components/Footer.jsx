@@ -1,5 +1,6 @@
 import React from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
@@ -8,8 +9,8 @@ export function Footer() {
         className="footer footer-center gap-2 py-4 xs2:p-4 bg-base-200 text-base-content rounded"
         >
         <div className="grid grid-flow-col gap-2 xs:gap-4">
-            <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="https://github.com/AlanStall">
-            Desenvolvedor
+            <a className="link link-hover hover:text-[#00ff88]">
+                <Link to="/Curriculo" target="_blank">Currículo</Link>
             </a>
             <a
             className="link link-hover hover:text-[#00ff88]" target="_blank"
