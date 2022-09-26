@@ -1056,6 +1056,23 @@ export function Pronunciation() {
           >
             MINHA LISTA
           </button>
+
+
+
+
+          {/* <button
+            className="btn btn-success btn-start m-1"
+            onClick={() => navigate('/Curriculo')}
+          >
+          Curriculo
+          </button>  */}
+
+
+
+
+
+
+
         </div>
       </div>
     </>

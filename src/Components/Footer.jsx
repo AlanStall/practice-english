@@ -22,6 +22,9 @@ export function Footer() {
             </a>
             <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="https://github.com/AlanStall/practice-english">
             Código Fonte
+            </a>            
+            <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="/Alan_Stall-Curriculo.pdf">
+            Curriculo
             </a>
         </div>
 
