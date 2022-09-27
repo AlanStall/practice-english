@@ -24,7 +24,7 @@ export function Footer() {
             Código Fonte
             </a>            
             <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="/Alan_Stall-Curriculo-2022.pdf">
-            Curriculo
+            Currículo
             </a>
         </div>
 
