@@ -941,6 +941,8 @@ export function Pronunciation() {
   }
 
   async function speakWord() {
+    setMessage('');
+    setSpoken('');
     setNotChangeWord(true);
     setDisabledListening(true);
     setMicrophoneOn(true);
@@ -954,14 +956,22 @@ export function Pronunciation() {
       setSpoken(transcript);
       check(transcript);
     };
+
+    recognition.onend = () => {      
+      setDisabledListening(false);
+      setMicrophoneOn(false);
+      setNotChangeWord(false);       
+    }
   }
 
-  let nextWord = '';
+  let firstTimeWord = word;
+  let nextWord = '';  
   async function check(transcript) {
-    if (word === transcript || nextWord === transcript || null === transcript) {
+    if (firstTimeWord === transcript || nextWord === transcript) {
       setMessage("Você acertou!!!");
       await sleep(2000);
-      nextWord = randomWord();
+      nextWord = randomWord();      
+      firstTimeWord = '';
       setWord(nextWord);
       setSpoken('');
       setMessage('');
@@ -1056,23 +1066,6 @@ export function Pronunciation() {
           >
             MINHA LISTA
           </button>
-
-
-
-
-          {/* <button
-            className="btn btn-success btn-start m-1"
-            onClick={() => navigate('/Curriculo')}
-          >
-          Curriculo
-          </button>  */}
-
-
-
-
-
-
-
         </div>
       </div>
     </>
