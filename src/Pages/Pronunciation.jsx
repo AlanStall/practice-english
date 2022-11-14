@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IconMicrophone } from '../Components/IconMicrophone.jsx'
 
 export function Pronunciation() {
   const navigate = useNavigate();
@@ -1019,7 +1020,7 @@ export function Pronunciation() {
               TROCAR PALAVRA
             </button>
             <button
-              className="btn btn-sm btn-outline btn-success xs:btn-md  mr-2"
+              className="btn btn-sm btn-outline btn-success xs:btn-md mr-2"
               onClick={listenWord}
               disabled={disabledListening}
             >
@@ -1030,21 +1031,19 @@ export function Pronunciation() {
             > 
               PRONUNCIAR
             </button>
-            <button className="relative top-3.5 rounded-md pointer-events-none"
+            <button className="relative top-3.5 rounded-md pointer-events-none mx-2"
               style={{ animation: microphoneOn ? 'pulse 1.5s ease-out infinite' : '' , color: microphoneOn ? '#fa4b4bfb' : 'gray'}}
               aria-label="Microphone"
               >
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="35"
-                height="35"
-                viewBox="0 0 300 300"
-                className="fill-current h-10"
-                >
-                <path d="M149.996,0C67.157,0,0.001,67.161,0.001,149.997S67.157,300,149.996,300s150.003-67.163,150.003-150.003S232.835,0,149.996,0z M109.368,100.055c0-21.018,17.1-38.115,38.115-38.115s38.115,17.099,38.115,38.115v45.782c0,21.016-17.1,38.113-38.115,38.113c-21.015,0-38.115-17.1-38.115-38.113V100.055z M209.384,147.282c0,31.662-23.905,57.832-54.613,61.452v20.915h12.802v15.562H126.41v-15.562h12.802v-21.042c-30.231-4.056-53.628-30.003-53.628-61.328v-21.742h15.562v21.742c0,25.549,20.788,46.334,46.337,46.334s46.34-20.788,46.34-46.334v-21.742h15.562C209.384,125.537,209.384,147.282,209.384,147.282z"/>
-			          <path d="M147.483,168.391c12.436,0,22.554-10.115,22.554-22.551v-12.991h-45.108v12.991C124.929,158.274,135.047,168.391,147.483,168.391z"/>
-                </svg>
+                < IconMicrophone />
             </button>
+            <button
+                className="btn btn-sm btn-outline btn-success xs:btn-md mr-2"
+                onClick={() => window.location.reload(true)}
+            >
+                ATUALIZAR PÁGINA
+            </button>
+
             <p className="text-center text-[14px] font-bold p-2 xs2:text-[24px] xs2:p-4 sm:text-[28px]">
               {word}
             </p>
