@@ -7,24 +7,15 @@ export function Footer() {
         id="footer"
         className="footer footer-center gap-2 py-4 xs2:p-4 bg-base-200 text-base-content rounded"
         >
-        <div className="grid grid-flow-col gap-2 xs:gap-4">
-            <a
-            className="link link-hover hover:text-[#00ff88]" target="_blank"
-            href="https://github.com/AlanStall"
-            >
-            Desenvolvedor
-            </a>
-            <a
-            className="link link-hover hover:text-[#00ff88]" target="_blank"
-            href="https://www.linkedin.com/in/alan-stall-b722a962/"
-            >
-            Contato
-            </a>
+        <div className="grid grid-flow-col gap-2 xs:gap-4">            
             <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="https://github.com/AlanStall/practice-english">
             Código Fonte
             </a>            
             <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="/Alan_Stall-Curriculo-2022.pdf">
             Currículo
+            </a>
+            <a className="link link-hover hover:text-[#00ff88]" target="_blank" href="https://portfolio.alanstall.com/">
+            Portfólio
             </a>
         </div>
 
@@ -59,7 +50,7 @@ export function Footer() {
 
         <div>
             <div className="grid grid-flow-col gap-1">
-                <p className="pt-1">e-mail: alan_kstall@hotmail.com</p>
+                <p className="pt-1">alan_kstall@hotmail.com</p>
                 <CopyToClipboard text="alan_kstall@hotmail.com">
                     <button className="btn btn-outline btn-sm mt-3 xs:btn-xs xs:mt-0">Copiar e-mail</button>
                 </CopyToClipboard>
